@@ -68,7 +68,7 @@ export default function Home() {
         <Navbar />
       </nav>
       <div className="searchbar flex flex-row justify-center items-center my-2 gap-2">
-        <input type="text" placeholder="Search city" onChange={handleInputChange}  onKeyPress={handleKeyPress} value={city} className="search rounded-3xl text-black px-3 py-2" />
+        <input type="text" placeholder="Search city" onChange={handleInputChange}  onKeyDown={handleKeyPress} value={city} className="search rounded-3xl text-black px-3 py-2" />
         <button className="serch-btn" onClick={getData}>
         <FaSearch className="text-2xl"/>
         </button>
