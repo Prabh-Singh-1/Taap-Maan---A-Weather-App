@@ -37,7 +37,7 @@ export default function Home() {
   }
 
   const toggleVisibility = () => {
-    setisvisible(!isvisible);
+    setisvisible(true);
   };
 
   return (
