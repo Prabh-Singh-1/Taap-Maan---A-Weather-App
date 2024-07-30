@@ -19,6 +19,7 @@ export default function Home() {
   const API_KEY = 'de88fef6c0c257a892aa56e488fd0e7e'
 
   async function getData() {
+    
     toggleVisibility();
     const API_URL = `https://api.openweathermap.org/data/2.5/weather?&units=metric&q=${city}&appid=${API_KEY}`
 
@@ -28,8 +29,13 @@ export default function Home() {
     setState(data.sys.country)
     sethumidity(data.main.humidity)
     setwind(data.wind.speed)
-    
+    setisvisible(true)
   }
+
+  const handleInputChange = (e) => {
+    setcity(e.target.value);
+    setisvisible(false); 
+  };
 
   const capitalizeFirstLetter = (string) => {
     if (typeof string !== 'string' || !string.length) return '';
@@ -46,12 +52,12 @@ export default function Home() {
         <Navbar />
       </nav>
       <div className="searchbar flex flex-row justify-center items-center my-2 gap-2">
-        <input type="text" placeholder="Search city" onChange={(e) => setcity(e.target.value)} value={city} className="search rounded-3xl text-black px-3 py-2" />
+        <input type="text" placeholder="Search city" onChange={handleInputChange} value={city} className="search rounded-3xl text-black px-3 py-2" />
         <button className="serch-btn" onClick={getData}>
           <Search />
         </button>
       </div>
-      {isvisible &&
+      {isvisible && (
         <main className="main m-5 rounded-lg flex flex-col justify-center items-center gap-2">
           <div className="logo my-4">
             <Image src={sun} alt="sun" width={150} />
@@ -89,7 +95,7 @@ export default function Home() {
             </div>
           </div>
         </main>
-      }
+      )}
     </>
   );
 }
