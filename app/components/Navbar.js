@@ -3,8 +3,9 @@ import React from 'react'
 import Link from 'next/link'
 import { useState } from 'react'
 import "./Navbar.css"
-import Back from '../svg/return'
-import Menu from '../svg/menu'
+import { RiMenu2Line } from "react-icons/ri"; 
+import { IoIosReturnLeft } from "react-icons/io";  
+
 
 
 const Navbar = () => {
@@ -22,7 +23,7 @@ const Navbar = () => {
                 </div>
                 <div className='nav-opt h-14 flex justify-center items-center'>
                     <div className='menu sm:hidden block cursor-pointer' onClick={handleMobNav}>
-                        <Menu />
+                    <RiMenu2Line />
                     </div>
                     <div className='flex justify-center items-center h-14'>
                         <ul className='list-none h-full text-base sm:flex sm:flex-row sm:gap-7 hidden '>
@@ -32,10 +33,11 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <ul className='mob-nav z-10 text-white sm:hidden list-none text-lg gap-3 absolute  -top-96 flex flex-col sm:gap-8 p-8' name='mobNav' style={{ top: isMoved ? '-384px' : '0px', height: isMoved ? 'auto' : '100%', transition: 'all 0.3s', right: '0px' }}>
-                        <li onClick={handleMobNav}><Back alt="return" className='-mt-3 cursor-pointer'  /></li>
+                        <li onClick={handleMobNav}><IoIosReturnLeft alt="return" className='-mt-3 cursor-pointer' /></li>
                         <li><Link href='/'>Home</Link></li>
                         <li><Link href='/contact'>Contact</Link></li>
                         <li><Link href='/feedback'>Feedback</Link></li>
+
                     </ul>
                 </div>
             </div>

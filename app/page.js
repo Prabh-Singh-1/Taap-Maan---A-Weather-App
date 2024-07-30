@@ -2,12 +2,11 @@
 import Navbar from "./components/Navbar";
 import Image from "next/image";
 import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 import sun from "@/public/img/sun.png"
 import humid from '@/public/img/humidity.png'
 import Wind from '@/public/img/Wind.png'
-import Search from '@/app/svg/Search'
 import '@/app/page.css'
-import { sendError } from "next/dist/server/api-utils";
 
 export default function Home() {
   const [state, setState] = useState('')
@@ -65,7 +64,7 @@ export default function Home() {
       <div className="searchbar flex flex-row justify-center items-center my-2 gap-2">
         <input type="text" placeholder="Search city" onChange={handleInputChange} value={city} className="search rounded-3xl text-black px-3 py-2" />
         <button className="serch-btn" onClick={getData}>
-          <Search />
+        <FaSearch />
         </button>
       </div>
       {iserror ? (<div className="city text-2xl font-medium text-red-500 p-5 text-center">{capitalizeFirstLetter(error)}!</div>)
