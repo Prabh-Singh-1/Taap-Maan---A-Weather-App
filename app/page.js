@@ -64,7 +64,7 @@ export default function Home() {
       <div className="searchbar flex flex-row justify-center items-center my-2 gap-2">
         <input type="text" placeholder="Search city" onChange={handleInputChange} value={city} className="search rounded-3xl text-black px-3 py-2" />
         <button className="serch-btn" onClick={getData}>
-        <FaSearch />
+        <FaSearch className="text-2xl"/>
         </button>
       </div>
       {iserror ? (<div className="city text-2xl font-medium text-red-500 p-5 text-center">{capitalizeFirstLetter(error)}!</div>)
@@ -88,8 +88,8 @@ export default function Home() {
                 </div>
 
               </div>
-              <div className="other w-full my-4 sm:px-16 flex flex-row sm:justify-around justify-between px-4 items-center">
-                <div className="humdity flex justify-center items-center gap-3">
+              <div className="other w-full my-4 sm:px-16 flex flex-row sm:justify-around justify-between px-2 items-center">
+                <div className="humdity flex justify-center items-center sm:gap-3 gap-1">
                   <Image src={humid} alt="humidity" className="w-12" />
                   <div className="flex flex-col justify-start">
                     <span className="text-xl font-semibold ">
@@ -100,7 +100,7 @@ export default function Home() {
                     </span>
                   </div>
                 </div>
-                <div className="wind flex justify-center items-center gap-3">
+                <div className="wind flex justify-center items-center sm:gap-3 gap-1">
                   <Image src={Wind} alt="wind" className="w-12" />
                   <div className="flex flex-col justify-start">
                     <span className="text-xl font-semibold">
