@@ -202,7 +202,7 @@ export default function Home() {
                 </div>
               </section>
 
-              <section className="forecast main sm:m-5 m-3 rounded-lg p-3">
+              <section className="forecast main sm:m-5 m-3 rounded-lg p-2">
                 {processedData.map((item, index) => (
                   <div key={index}>
                     
