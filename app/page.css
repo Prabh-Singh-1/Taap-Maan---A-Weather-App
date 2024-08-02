@@ -4,3 +4,18 @@
 .logo{
     margin-right: 20px;
 }
+.default-screen{
+    margin-top: 10%;
+    color: #b4bcbd;
+    padding: 0rem 3rem;
+}
+@media screen and (max-width: 640px) {
+    .default-screen{
+        margin-top: 30%;  
+    }
+}
+@media screen and (max-width: 360px) {
+    .searchbar input{
+        width: 12rem;
+    }
+}

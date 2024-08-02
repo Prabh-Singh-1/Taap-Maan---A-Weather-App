@@ -25,6 +25,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   const [processedData, setProcessedData] = useState([]);
+  const [searched, setsearched] = useState(false);
 
   const API_KEY = 'de88fef6c0c257a892aa56e488fd0e7e'
   const API_URL_CURR = `https://api.openweathermap.org/data/2.5/weather?&units=metric&q=${city}&appid=${API_KEY}`
@@ -55,6 +56,7 @@ export default function Home() {
   };
 
   async function getData() {
+    setsearched(true)
     try {
       const response_current = await fetch(API_URL_CURR);
       var data_current = await response_current.json();
@@ -97,7 +99,7 @@ export default function Home() {
         }));
 
         setProcessedData(processedArray);
-        console.log(processedArray);
+        
       }
     } finally {
       setLoading(false);
@@ -108,6 +110,7 @@ export default function Home() {
   const handleInputChange = (e) => {
     setCity(e.target.value);
     setIsVisible(false);
+    setsearched(false)
   };
 
   const capitalizeFirstLetter = (string) => {
@@ -122,6 +125,7 @@ export default function Home() {
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       getData();
+      setsearched(true);
     }
   }
 
@@ -135,13 +139,19 @@ export default function Home() {
         <button className="serch-btn" onClick={getData}>
           <FaSearch className="text-2xl" />
         </button>
-      </div>
+      </div>  
       {loading && <Loader />}
+      {!searched && (
+        <div className="default-screen text-center text-xl font-bold">
+              Search your City or Country to check Weather Forcast.
+        </div>
+      )}
       {isError ? (<div className="city text-2xl font-medium text-red-500 p-5 text-center">{capitalizeFirstLetter(error)}!</div>)
         : (<div>
           {isVisible && (
             <div>
               <main className="main sm:m-5 m-3 rounded-lg flex flex-col justify-center items-center gap-2">
+                
                 <div className="logo my-4 -mr-10">
                 <Image src={getWeatherImage(today_dis)} alt={today_dis} width={150} />
                 </div>
@@ -179,7 +189,7 @@ export default function Home() {
                 </div>
               </main>
 
-              <section className="today main sm:m-5 m-3 rounded-lg p-3">
+              <section className="today main sm:m-5 m-3 rounded-lg sm:p-3 p-0">
                 <div className="text-center mb-2 text-2xl font-medium">
                   Today Forcasting
                 </div>
@@ -188,7 +198,7 @@ export default function Home() {
                   <div className="flex flex-col justify-center items-center gap-2 py-1">
                     <span className="text-xl">Now</span>
                     <span><Image src={sun} alt="sun" width={50} /></span>
-                    <span className="text-xl">{temp}</span> {/* Use the separate state here */}
+                    <span className="text-xl">{temp}</span> 
                   </div>
                   {filteredData.slice(-3).map((item, index) => (
                     <div key={index} className="flex flex-col justify-center items-center gap-2 py-1">
