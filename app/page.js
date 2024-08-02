@@ -181,7 +181,7 @@ export default function Home() {
 
               <section className="today main sm:m-5 m-3 rounded-lg p-3">
                 <div className="text-center mb-2 text-2xl font-medium">
-                  Today's Forcasting
+                  Today Forcasting
                 </div>
                 <hr />
                 <div className="flex sm:justify-around justify-between items-center py-2 sm:px-12 px-3">
@@ -207,15 +207,15 @@ export default function Home() {
                   <div key={index}>
                     
                     <div className="flex flex-row justify-around items-center py-4 gap-5">
-                      <span className="text-xl font-medium">{item.day}</span>
+                      <span className="text-xl sm:text-lg sm:font-medium font-normal max-w-20">{item.day}</span>
                       <span><Image src={getWeatherImage(item.description)} alt={item.description} width={50} /></span>
                       <div className="flex sm:flex-row flex-col justify-center items-center gap-2">
-                        <span className="text-xl">{item.min}°C</span>
-                        <span className="text-xl">min</span>
+                        <span className="sm:text-xl text-sm ">{item.min}°C</span>
+                        <span className="sm:text-xl text-sm">min</span>
                       </div>
                       <div className="flex sm:flex-row flex-col justify-center items-center gap-2">
-                        <span className="text-xl">{item.max}°C</span>
-                        <span className="text-xl">max</span>
+                        <span className="sm:text-xl text-sm">{item.max}°C</span>
+                        <span className="sm:text-xl text-sm">max</span>
                       </div>
                     </div>
                     <hr />
