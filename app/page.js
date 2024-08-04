@@ -75,22 +75,22 @@ export default function Home() {
   const getWeatherClip = (description) => {
     switch (description.toLowerCase()) {
       case 'clear sky':
-        return '/videos/clear-sky.mp4';
+        return 'static/videos/clear-sky.mp4';
       case 'few clouds':
         return few_clouds_clip;
       case 'scattered clouds':
       case 'broken clouds':
-        return '/videos/clouds.mp4';
+        return 'static/videos/clouds.mp4';
       case 'shower rain':
       case 'light rain':
       case 'rain':
-        return '/videos/rain.mp4';
+        return 'static/videos/rain.mp4';
       case 'thunderstorm':
-        return '/videos/storm.mp4';
+        return 'static/videos/storm.mp4';
       case 'snow':
-        return '/videos/snow.mp4';
+        return 'static/videos/snow.mp4';
       default:
-        return '/videos/clear-sky.mp4';
+        return 'static/videos/clear-sky.mp4';
     }
   };
   
@@ -191,7 +191,7 @@ export default function Home() {
 
                 <div className="weather-clip relative w-full h-screen">
                   <video className="background-video absolute top-0 left-0 w-full h-full object-cover" src={getWeatherClip(description)} autoPlay loop muted />
-                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
+                  <distaticv className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
                   <div className="content flex flex-col justify-center items-center relative z-10 sm:gap-0 gap-3">
                     <div className="logo my-4 -mr-10">
                       <Image src={getWeatherImage(description)} alt={description} width={150} height={150} />
