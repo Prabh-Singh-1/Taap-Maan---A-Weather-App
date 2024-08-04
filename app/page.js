@@ -75,23 +75,25 @@ export default function Home() {
   const getWeatherClip = (description) => {
     switch (description.toLowerCase()) {
       case 'clear sky':
-        return clearSky;
+        return '/videos/clear-sky.mp4';
       case 'few clouds':
         return few_clouds_clip;
       case 'scattered clouds':
       case 'broken clouds':
-        return clouds_clip;
+        return '/videos/clouds.mp4';
       case 'shower rain':
+      case 'light rain':
       case 'rain':
-        return rain_clip;
+        return '/videos/rain.mp4';
       case 'thunderstorm':
-        return storm_clip;
+        return '/videos/storm.mp4';
       case 'snow':
-        return snow_clip;
+        return '/videos/snow.mp4';
       default:
-        return clearSky;
+        return '/videos/clear-sky.mp4';
     }
   };
+  
 
   async function getData() {
     setsearched(true);
