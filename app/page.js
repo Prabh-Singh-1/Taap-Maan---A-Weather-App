@@ -191,7 +191,7 @@ export default function Home() {
 
                 <div className="weather-clip relative w-full h-screen">
                   <video className="background-video absolute top-0 left-0 w-full h-full object-cover" src={getWeatherClip(description)} autoPlay loop muted />
-                  <distaticv className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
+                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
                   <div className="content flex flex-col justify-center items-center relative z-10 sm:gap-0 gap-3">
                     <div className="logo my-4 -mr-10">
                       <Image src={getWeatherImage(description)} alt={description} width={150} height={150} />
