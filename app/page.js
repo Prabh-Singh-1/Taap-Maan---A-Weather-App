@@ -1,31 +1,40 @@
-"use client"
+"use client";
 import Navbar from "./components/Navbar";
 import Image from "next/image";
 import { useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import Loader from "./components/loader";
-import sun from "@/public/img/sun.png"
-import humid from '@/public/img/humidity.png'
-import Wind from '@/public/img/Wind.png'
-import cloudsImage from '@/public/img/cloudy.png'
-import LightRain from '@/public/img/cloudy_rain.png'
-import rainImage from '@/public/img/heavy-rain.png'
-import '@/app/page.css'
+import sun from "@/public/img/sun.png";
+import humid from '@/public/img/humidity.png';
+import Wind from '@/public/img/Wind.png';
+import cloud from '@/public/img/cloud.png';
+import few_cloud from '@/public/img/few_cloud.png';
+import sun_shower from '@/public/img/sun-shower.png';
+import rainImage from '@/public/img/heavy-rain.png';
+import storm from '@/public/img/storm.png';
+import snow from '@/public/img/snow.png';
+import mist from '@/public/img/mist.png';
+import clearSky from '@/app/videos/clear-sky.mp4';
+import clouds_clip from '@/app/videos/clouds.mp4';
+import few_clouds_clip from '@/app/videos/few-cloud.mp4';
+import rain_clip from '@/app/videos/rain.mp4';
+import snow_clip from '@/app/videos/snow.mp4';
+import storm_clip from '@/app/videos/storm.mp4';
+
+import '@/app/page.css';
 
 export default function Home() {
-  const [state, setState] = useState('')
-  const [city, setCity] = useState('')
-  const [temp, setTemp] = useState('')
-  const [today_dis, settoday_dis] = useState('')
-  const [humidity, setHumidity] = useState('')
-  const [wind, setWind] = useState('')
-  const [isVisible, setIsVisible] = useState(false)
-  const [error, setError] = useState('')
-  const [isError, setIsError] = useState(false)
+
+  const [city, setCity] = useState('');
+  const [description, setdescription] = useState('')
+  const [isVisible, setIsVisible] = useState(false);
+  const [error, setError] = useState('');
+  const [isError, setIsError] = useState(false);
   const [loading, setLoading] = useState(true);
   const [filteredData, setFilteredData] = useState([]);
   const [processedData, setProcessedData] = useState([]);
   const [searched, setsearched] = useState(false);
+  const [currdata, setcurrdata] = useState([]);
 
   const API_KEY = 'de88fef6c0c257a892aa56e488fd0e7e'
   const API_URL_CURR = `https://api.openweathermap.org/data/2.5/weather?&units=metric&q=${city}&appid=${API_KEY}`
@@ -33,7 +42,7 @@ export default function Home() {
 
   const convertTo12HourFormat = (time24) => {
     const [hour, minute] = time24.split(':');
-    let hour12 = parseInt(hour) % 12 || 12; // Convert 24 hour to 12 hour
+    let hour12 = parseInt(hour) % 12 || 12;
     const ampm = parseInt(hour) >= 12 ? 'PM' : 'AM';
     return `${hour12}:${minute} ${ampm}`;
   };
@@ -41,22 +50,50 @@ export default function Home() {
   const getWeatherImage = (description) => {
     switch (description.toLowerCase()) {
       case 'clear sky':
-      case 'sunny':
         return sun;
+      case 'few clouds':
+        return few_cloud;
+      case 'scattered clouds':
       case 'broken clouds':
-      case 'clouds':
-        return cloudsImage;
-      case 'light rain':
-        return LightRain;
+        return cloud;
+      case 'shower rain':
+        return sun_shower;
       case 'rain':
         return rainImage;
+      case 'thunderstorm':
+        return storm;
+      case 'snow':
+        return snow;
+      case 'mist':
+        return mist;
       default:
-        return sun; // default image if no match is found
+        return sun;
+    }
+  };
+
+  const getWeatherClip = (description) => {
+    switch (description.toLowerCase()) {
+      case 'clear sky':
+        return clearSky;
+      case 'few clouds':
+        return few_clouds_clip;
+      case 'scattered clouds':
+      case 'broken clouds':
+        return clouds_clip;
+      case 'shower rain':
+      case 'rain':
+        return rain_clip;
+      case 'thunderstorm':
+        return storm_clip;
+      case 'snow':
+        return snow_clip;
+      default:
+        return clearSky;
     }
   };
 
   async function getData() {
-    setsearched(true)
+    setsearched(true);
     try {
       const response_current = await fetch(API_URL_CURR);
       var data_current = await response_current.json();
@@ -66,19 +103,16 @@ export default function Home() {
       if (!response_current.ok && !res_cast.ok) {
         setError(data_current.message);
         setError(data_cast.message);
-        setIsError(true)
+        setIsError(true);
       } else {
-        setIsError(false)
-        settoday_dis(data_current.weather[0].description);
-        setTemp(data_current.main.temp)
-        setState(data_current.sys.country)
-        setHumidity(data_current.main.humidity)
-        setWind(data_current.wind.speed)
-        setIsVisible(true)
+        setdescription(data_current.weather[0].description)
+        setcurrdata(data_current);
+        setIsError(false);
+        setIsVisible(true);
 
-        const today = new Date().toISOString().split('T')[0]; // Gets "YYYY-MM-DD" format
+        const today = new Date().toISOString().split('T')[0]; // Get "YYYY-MM-DD" format
         const filtered = data_cast.list.filter(item => item.dt_txt.startsWith(today));
-        setFilteredData(filtered)
+        setFilteredData(filtered);
 
         const otherDaysData = data_cast.list.filter(item => !item.dt_txt.startsWith(today));
 
@@ -99,7 +133,7 @@ export default function Home() {
         }));
 
         setProcessedData(processedArray);
-        
+
       }
     } finally {
       setLoading(false);
@@ -110,24 +144,24 @@ export default function Home() {
   const handleInputChange = (e) => {
     setCity(e.target.value);
     setIsVisible(false);
-    setsearched(false)
+    setsearched(false);
   };
 
   const capitalizeFirstLetter = (string) => {
     if (typeof string !== 'string' || !string.length) return '';
     return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+  };
 
   const toggleVisibility = () => {
     setIsVisible(true);
-  }
+  };
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
       getData();
       setsearched(true);
     }
-  }
+  };
 
   return (
     <>
@@ -139,11 +173,11 @@ export default function Home() {
         <button className="serch-btn" onClick={getData}>
           <FaSearch className="text-2xl" />
         </button>
-      </div>  
+      </div>
       {loading && <Loader />}
       {!searched && (
         <div className="default-screen text-center text-xl font-bold">
-              Search your City or Country to check Weather Forcast.
+          Search your City or Country to check Weather Forcast.
         </div>
       )}
       {isError ? (<div className="city text-2xl font-medium text-red-500 p-5 text-center">{capitalizeFirstLetter(error)}!</div>)
@@ -151,45 +185,67 @@ export default function Home() {
           {isVisible && (
             <div>
               <main className="main sm:m-5 m-3 rounded-lg flex flex-col justify-center items-center gap-2">
-                
-                <div className="logo my-4 -mr-10">
-                <Image src={getWeatherImage(today_dis)} alt={today_dis} width={150} />
-                </div>
-                <div className="hero flex flex-col gap-3">
-                  <div className="temp text-6xl font-semibold">
-                    {temp} °C
-                  </div>
-                  <div className="city text-4xl font-medium">
-                    {capitalizeFirstLetter(city)}, {state}
-                  </div>
-                </div>
-                <div className="other w-full my-4 sm:px-16 flex flex-row sm:justify-around justify-between px-2 items-center">
-                  <div className="humdity flex justify-center items-center sm:gap-3 gap-1">
-                    <Image src={humid} alt="humidity" className="w-12" />
-                    <div className="flex flex-col justify-start">
-                      <span className="text-xl font-semibold ">
-                        {humidity}
-                      </span>
-                      <span className="text-lg font-medium">
-                        Humidity
-                      </span>
+
+                <div className="weather-clip relative w-full h-screen">
+                  <video className="background-video absolute top-0 left-0 w-full h-full object-cover" src={getWeatherClip(description)} autoPlay loop muted />
+                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
+                  <div className="content flex flex-col justify-center items-center relative z-10 sm:gap-0 gap-3">
+                    <div className="logo my-4 -mr-10">
+                      <Image src={getWeatherImage(description)} alt={description} width={150} height={150} />
+                    </div>
+                    <div className="hero flex flex-col gap-3">
+                      <div className="temp text-6xl font-semibold">
+                        {currdata.main.temp} °C
+                      </div>
+                      <div className="city text-4xl font-medium">
+                        {capitalizeFirstLetter(currdata.name)}, {currdata.sys.country}
+                      </div>
+                    </div>
+                    <div className="other w-full my-4 sm:px-16 flex flex-col sm:justify-around justify-between px-2 items-center sm:gap-1 gap-3">
+                      <div className="flex justify-between items-center w-full py-1 px-6">
+
+                        <div className="weather_dec flex flex-col justify-start">
+                          <span>Description</span>
+                          <span className="text-xl font-medium flex-wrap">
+                            {capitalizeFirstLetter(currdata.weather[0].description)}
+                          </span>
+
+                        </div>
+                        <div className="feel_like flex flex-col justify-center items-center">
+                          <div className="">Feels Like</div>
+                          <div className="flex flex-col justify-center items-center">
+                            <span className="text-xl font-semibold ">
+                              {currdata.main.feels_like} °C
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex justify-between items-center w-full py-1 px-2">
+                        <div className="humdity flex justify-center items-center sm:gap-3 gap-1">
+                          <Image src={humid} alt="Humidity" width={50} height={50} />
+                          <div className="flex flex-col">
+                            <span>Humidity</span>
+                            <span className="text-xl font-semibold">
+                              {currdata.main.humidity} %
+                            </span>
+                          </div>
+                        </div>
+                        <div className="wind flex justify-center items-center sm:gap-3 gap-1">
+                          <Image src={Wind} alt="Wind" width={50} height={50} />
+                          <div className="flex flex-col">
+                            <span>Wind Speed</span>
+                            <span className="text-xl font-semibold">
+                              {currdata.wind.speed} km/h
+                            </span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                  <div className="wind flex justify-center items-center sm:gap-3 gap-1">
-                    <Image src={Wind} alt="wind" className="w-12" />
-                    <div className="flex flex-col justify-start">
-                      <span className="text-xl font-semibold">
-                        {wind}
-                      </span>
-                      <span className="text-lg font-medium">
-                        Wind speed
-                      </span>
-                    </div>
-                  </div>
+
                 </div>
               </main>
-
-              <section className="today main sm:m-5 m-3 rounded-lg sm:p-3 p-0">
+              <section className="today sm:m-5 m-3 rounded-lg sm:p-3 p-0">
                 <div className="text-center mb-2 text-2xl font-medium">
                   Today Forcasting
                 </div>
@@ -198,7 +254,7 @@ export default function Home() {
                   <div className="flex flex-col justify-center items-center gap-2 py-1">
                     <span className="text-xl">Now</span>
                     <span><Image src={sun} alt="sun" width={50} /></span>
-                    <span className="text-xl">{temp}</span> 
+                    <span className="text-xl">{currdata.main.temp}</span>
                   </div>
                   {filteredData.slice(-3).map((item, index) => (
                     <div key={index} className="flex flex-col justify-center items-center gap-2 py-1">
@@ -212,10 +268,10 @@ export default function Home() {
                 </div>
               </section>
 
-              <section className="forecast main sm:m-5 m-3 rounded-lg p-3">
+              <section className="forecast today sm:m-5 m-3 rounded-lg p-3">
                 {processedData.map((item, index) => (
                   <div key={index}>
-                    
+
                     <div className="flex flex-row justify-around items-center py-4 gap-5">
                       <span className="text-xl sm:text-lg sm:font-medium font-normal max-w-20">{item.day}</span>
                       <span><Image src={getWeatherImage(item.description)} alt={item.description} width={50} /></span>
@@ -232,9 +288,10 @@ export default function Home() {
                   </div>
                 ))}
               </section>
-            </div>
-          )}
-        </div>)}
+            </div >
+          )
+          }
+        </div >)}
     </>
-  );
+  )
 }
