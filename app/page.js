@@ -14,12 +14,13 @@ import rainImage from '@/public/img/heavy-rain.png';
 import storm from '@/public/img/storm.png';
 import snow from '@/public/img/snow.png';
 import mist from '@/public/img/mist.png';
-import clearSky from '@/app/videos/clear-sky.mp4';
-import clouds_clip from '@/app/videos/clouds.mp4';
-import few_clouds_clip from '@/app/videos/few-cloud.mp4';
-import rain_clip from '@/app/videos/rain.mp4';
-import snow_clip from '@/app/videos/snow.mp4';
-import storm_clip from '@/app/videos/storm.mp4';
+import clearSky from '@/public/videos/clear-sky.mp4';
+import clouds_clip from '@/public/videos/clouds.mp4';
+import few_clouds_clip from '@/public/videos/few-cloud.mp4';
+import rain_clip from '@/public/videos/rain.mp4';
+import snow_clip from '@/public/videos/snow.mp4';
+import storm_clip from '@/public/videos/storm.mp4';
+
 
 import '@/app/page.css';
 
