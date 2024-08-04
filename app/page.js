@@ -189,10 +189,10 @@ export default function Home() {
             <div>
               <main className="main sm:m-5 m-3 rounded-lg flex flex-col justify-center items-center gap-2">
 
-                <div className="weather-clip relative w-full h-screen">
-                  <video className="background-video absolute top-0 left-0 w-full h-full object-cover" src={getWeatherClip(description)} autoPlay loop muted />
-                  <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50"></div>
-                  <div className="content flex flex-col justify-center items-center relative z-10 sm:gap-0 gap-3">
+                
+                  
+                  
+                  
                     <div className="logo my-4 -mr-10">
                       <Image src={getWeatherImage(description)} alt={description} width={150} height={150} />
                     </div>
@@ -244,9 +244,9 @@ export default function Home() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  
 
-                </div>
+                
               </main>
               <section className="today sm:m-5 m-3 rounded-lg sm:p-3 p-0">
                 <div className="text-center mb-2 text-2xl font-medium">
