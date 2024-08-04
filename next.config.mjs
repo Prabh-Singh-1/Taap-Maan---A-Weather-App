@@ -8,8 +8,8 @@ const nextConfig = {
         {
           loader: 'file-loader',
           options: {
-            publicPath: '/videos/', // Adjust if necessary
-            outputPath: 'videos/', // Adjust if necessary
+            publicPath: '/_next/static/videos/',
+            outputPath: 'static/videos/',
             name: '[name].[hash].[ext]',
           },
         },
