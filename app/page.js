@@ -53,19 +53,56 @@ export default function Home() {
       case 'clear sky':
         return sun;
       case 'few clouds':
-        return few_cloud;
       case 'scattered clouds':
+        return few_cloud;
       case 'broken clouds':
+      case 'overcast clouds':
         return cloud;
       case 'shower rain':
+      case 'light rain':
+      case 'moderate rain':
+      case 'light intensity shower rain':
         return sun_shower;
       case 'rain':
+      case 'heavy intensity rain':
+      case 'very heavy rain':
+      case 'extreme rain':
+      case 'heavy intensity shower rain':
+      case 'ragged shower rain':
         return rainImage;
+      case 'thunderstorm with light rain':
+      case 'thunderstorm with rain':
+      case 'thunderstorm with heavy rain':
+      case 'light thunderstorm':
       case 'thunderstorm':
+      case 'heavy thunderstorm':
+      case 'ragged thunderstorm':
+      case 'thunderstorm with light drizzle':
+      case 'thunderstorm with drizzle':
+      case 'thunderstorm with heavy drizzle':
         return storm;
+      case 'light snow':
       case 'snow':
+      case 'heavy snow':
+      case 'sleet':
+      case 'light shower sleet':
+      case 'shower sleet':
+      case 'light rain and snow':
+      case 'rain and snow':
+      case 'light shower snow':
+      case 'shower snow':
+      case 'heavy shower snow':
         return snow;
       case 'mist':
+      case 'smoke':
+      case 'haze':
+      case 'sand/dust whirls':
+      case 'fog':
+      case 'sand':
+      case 'dust':
+      case 'volcanic ash':
+      case 'squalls':
+      case 'tornado':
         return mist;
       default:
         return sun;
