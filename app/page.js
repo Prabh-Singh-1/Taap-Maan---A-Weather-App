@@ -293,7 +293,7 @@ export default function Home() {
                 <div className="flex sm:justify-around justify-between items-center py-2 sm:px-12 px-3">
                   <div className="flex flex-col justify-center items-center gap-2 py-1">
                     <span className="text-xl">Now</span>
-                    <span><Image src={{getWeatherImage(currdata.weather[0].description)}} alt="sun" width={50} /></span>
+                    <span><Image src={getWeatherImage(currdata.weather[0].description)} alt="sun" width={50} /></span>
                     <span className="text-xl">{currdata.main.temp}</span>
                   </div>
                   {filteredData.slice(-3).map((item, index) => (
