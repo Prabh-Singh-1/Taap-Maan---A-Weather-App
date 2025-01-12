@@ -209,7 +209,7 @@ export default function Home() {
         <Navbar />
       </nav>
       <div className="searchbar flex flex-row justify-center items-center my-2 gap-2">
-        <input type="text" placeholder="Search city" onChange={handleInputChange} onKeyDown={handleKeyPress} value={city} className="search rounded-3xl text-black px-3 py-2" />
+        <input type="text" placeholder="Search city eg: Delhi" onChange={handleInputChange} onKeyDown={handleKeyPress} value={city} className="search rounded-3xl text-black px-3 py-2" />
         <button className="serch-btn" onClick={getData}>
           <FaSearch className="text-2xl" />
         </button>
@@ -218,8 +218,6 @@ export default function Home() {
      {!searched && (
         <div className="default-screen text-center text-xl font-bold">
           Search your City or Country to check Weather Forcast.
-          <img src="/img/vector.webp" alt="doodle imaage" className="w-[80%] h-[65%] flex justify-center items-center"/>
-        </div>
       )}
       {isError ? (<div className="city text-2xl font-medium text-red-500 p-5 text-center">{capitalizeFirstLetter(error)}!</div>)
         : (<div>
