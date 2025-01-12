@@ -215,9 +215,10 @@ export default function Home() {
         </button>
       </div>
       {loading && <Loader />}
-      {!searched && (
+     {!searched && (
         <div className="default-screen text-center text-xl font-bold">
           Search your City or Country to check Weather Forcast.
+          <img src="/img/vector.webp" alt="doodle imaage" className="w-[80%] h-[65%] flex justify-center items-center"/>
         </div>
       )}
       {isError ? (<div className="city text-2xl font-medium text-red-500 p-5 text-center">{capitalizeFirstLetter(error)}!</div>)
